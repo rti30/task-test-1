@@ -1,0 +1,133 @@
+import userApi from '@/api/user.js'
+//import { setToken, cleanTokensData, getJWTPayload, getToken } from '@/api/token.js';
+import { setToken, getToken, getUserId, cleanTokensData } from '@/api/token.js';
+let resolveAuth;
+let authPromise;
+
+export default {
+   namespaced: true,
+   state: {
+      token: null,
+      favorite: [],
+   },
+   getters: {
+      isLogin: state => state.token !== null,
+      token: state => state.token,
+      awaitAuth: () => authPromise,
+      favorite: (state) => state.favorite,
+
+   },
+   mutations: {
+      installToken(state, token) {
+         state.token = token;
+      },
+      addFav(state, form) {
+         state.favorite.push(form)
+      },
+      changeRequest(state, { form, key }) {
+         console.log(form, key)
+         state.favorite[key] = form;
+      },
+      setFav(state, data) {
+         console.log(data)
+         state.favorite = data;
+      },
+      removeRequest(state, id) {
+         console.log("state, remove", id);
+         state.favorite = state.favorite.filter(item => item.id !== id);
+      },
+      removeToken(state) {
+         state.token = null;
+      }
+   },
+
+   actions: {
+      async login({ commit, dispatch }, payload) {
+         authPromise = new Promise(resolve => resolveAuth = resolve)
+         const result = await userApi.login(payload);
+         if (result) {
+            console.log(result);
+            commit('installToken', result)
+            setToken(result, "myTestToken")
+            dispatch("getLocalFav");
+         }
+         else {
+            console.log(result);
+            commit('installToken', null)
+         }
+         resolveAuth();
+      },
+      async auth({ commit }) {
+         authPromise = new Promise(resolve => resolveAuth = resolve);
+         const token = getToken("myTestToken");
+         if (!token) {
+            commit('installToken', null)
+         }
+         const result = await userApi.auth(token);
+         if (result) {
+            commit('installToken', result)
+            setToken(result, "myTestToken")
+         }
+         else {
+            commit('installToken', null)
+         }
+         resolveAuth();
+      },
+      saveRequest({ commit, dispatch }, form) {
+         const id = +new Date();
+         commit('addFav', { id, ...form });
+         dispatch("saveFavLocal")
+      },
+      changeRequest({ commit, getters, dispatch }, { form, key }) {
+         console.log(form, key)
+         const hasFav = getters.favorite[key];
+         console.log(hasFav)
+         if (hasFav) {
+            commit('changeRequest', { form, key });
+            dispatch("saveFavLocal")
+         }
+      },
+      removeRequest({ commit, dispatch }, id) {
+         commit('removeRequest', id);
+         dispatch("saveFavLocal")
+      },
+
+      setFav({ commit, dispatch }, data) {
+         commit('setFav', data);
+         dispatch("saveFavLocal");
+      },
+      saveFavLocal({ dispatch, getters }) {
+         const { login } = getUserId(getters.token)
+         if (getters.favorite.length) {
+            localStorage.setItem("fav_" + login, JSON.stringify(getters.favorite));
+         }
+         else { dispatch("removeFavLocal", login) }
+      },
+      removeFavLocal({ getters }) {
+         const { login } = getUserId(getters.token)
+         cleanTokensData("fav_" + login)
+      },
+      async getLocalFav({ dispatch, getters }) {
+         await getters.awaitAuth;
+         if (getters.isLogin) {
+            const { login } = getUserId(getters.token)
+            const favData = JSON.parse(localStorage.getItem("fav_" + login));
+            console.log(favData);
+            if (favData) { dispatch("setFav", favData); }
+         }
+      },
+      async logout({ commit, getters }) {
+         await getters.awaitAuth;
+         cleanTokensData("myTestToken");
+         commit('removeToken');
+         commit('setFav', []);
+         commit('content/changeContent', [], { root: true });
+      }
+   },
+
+
+   //!logout дождаться завершения автоизациии
+   //! Очистить токен в сторадже
+   //! Очистить токен
+   //! favorite = []
+}
