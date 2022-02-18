@@ -32,7 +32,7 @@ let routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory('/test-task-1-demo/'),
+  history: createWebHistory(),
   routes,
   scrollBehavior() {
     document.getElementById('app').scrollIntoView();

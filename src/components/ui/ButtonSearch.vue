@@ -10,9 +10,6 @@
 import { mapActions, mapGetters } from "vuex";
 
 export default {
-  components: {
-    // ButtonSearch,
-  },
   computed: {
     ...mapGetters("content", { searchInProcessing: "searchInProcessing" }),
   },
