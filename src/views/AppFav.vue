@@ -1,15 +1,15 @@
 <template>
   <main class="page">
-    <main-header></main-header>
-    <main-fav />
+    <header-fav></header-fav>
+    <fav-main />
   </main>
 
 </template>
 <script>
-import MainFav from "@/components/main/MainFavorite.vue";
-import MainHeader from "@/components/main/MainHeader.vue";
+import FavMain from "@/components/favorite/FavoriteMain.vue";
+import HeaderFav from "@/components/common/CommonHeader.vue";
 export default {
-  components: { MainFav, MainHeader },
+  components: { FavMain, HeaderFav },
 };
 </script>
 <style lang="scss">

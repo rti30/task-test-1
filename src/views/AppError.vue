@@ -1,10 +1,10 @@
 <template>
-  <main-error />
+  <error-main />
 </template>
 <script>
-import MainError from "@/components/main/MainError.vue";
+import ErrorMain from "@/components/common/ErrorMain.vue";
 export default {
-  components: { MainError },
+  components: { ErrorMain },
 };
 </script>
 <style lang="scss">

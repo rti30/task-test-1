@@ -69,8 +69,6 @@ export default {
       gap: 0 50px;
     }
   }
-  &__logo {
-  }
 
   // .header__nav
   &__nav {
@@ -83,6 +81,10 @@ export default {
 .login {
   // .login__logo
   &__logo {
+    img {
+      height: 20px;
+      width: 40px;
+    }
   }
 }
 .nav {
@@ -120,9 +122,6 @@ export default {
   }
 
   // .nav__ui
-
-  &__ui {
-  }
   &__button {
     background-color: transparent;
     color: $c-Light;

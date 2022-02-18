@@ -7,12 +7,18 @@
       <component :is="Component" />
     </transition>
   </router-view>
+  <alert />
 </template>
 
 <script>
 import "@/assets/scss/index.scss";
+import Alert from "@/components/ui/Alert.vue";
 
-export default {};
+export default {
+  components: {
+    Alert,
+  },
+};
 </script>
 
 <style lang="scss">

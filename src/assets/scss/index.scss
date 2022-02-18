@@ -34,8 +34,6 @@ body {
 	//overflow: hidden;
 	display: flex;
 	flex-direction: column;
-	&._loaded {
-	}
 }
 //</ОБОЛОЧКА>===========================================================================================================
 .page {
@@ -116,16 +114,6 @@ body {
 //*</ПОВТОРЯЮЩЕЕСЯ ЭЛЕМЕНТЫ>====================================================================================================
 
 //*<UI ЭЛЕМЕНТЫ>================================================================================================================
-/* .input-icon {
-	position: relative;
-	&__icon {
-		transform: translate(-100%, -50%);
-		padding: 10px 10px;
-		position: absolute;
-		top: 50%;
-	}
-} */
-
 input[type="text"],
 input[type="email"],
 input[type="tel"],
@@ -133,6 +121,29 @@ input[type="password"] {
 	font-family: $fontFamily;
 	font-size: 16px;
 }
+.input {
+	border-radius: $main-radius;
+	border: 1px rgba(39, 39, 39, 0.1) solid;
+	padding: 15px 36px 15px 10px;
+
+	&:focus {
+		background-color: $c-focus;
+	}
+	&::placeholder {
+		color: $c-second;
+	}
+	&--search {
+		border-radius: $main-radius 0 0 $main-radius;
+	}
+
+	&__icon {
+		transform: translate(-100%, -50%);
+		padding: 10px 10px;
+		position: absolute;
+		top: 50%;
+	}
+}
+
 a,
 a:visited,
 a:active,
@@ -160,7 +171,7 @@ a:link {
 .icon-grid,
 .icon-list {
 	width: 20px;
-	height: 14px;
+	height: 20px;
 	opacity: 0.3;
 	&--active {
 		opacity: 1;
@@ -200,6 +211,19 @@ a:link {
 }
 
 //*<Тайминги и условия анимации>================================================================================================================
+.fade-enter-active,
+.fade-leave-active {
+	transition: opacity 0.5s;
+	opacity: 0;
+}
+.fade-enter-to {
+	opacity: 1;
+}
+.fade-enter,
+.fade-leave-to {
+	opacity: 0;
+}
+
 .anim-page-enter-active {
 	animation: pageIn 0.3s;
 }

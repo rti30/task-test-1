@@ -4,9 +4,6 @@ const Main = () => import('@/views/AppMain.vue');
 const Fav = () => import('@/views/AppFav.vue');
 const Login = () => import('@/views/AppLogin.vue');
 const Error = () => import('@/views/AppError.vue');
-/*
-
-const E404 = () => import('@/views/E404.vue'); */
 
 let routes = [
   {
@@ -41,7 +38,6 @@ const router = createRouter({
     document.getElementById('app').scrollIntoView();
   }
 });
-
 
 router.beforeEach(async (to, from, next) => {
   if (to.meta.auth) {

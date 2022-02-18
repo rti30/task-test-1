@@ -55,18 +55,16 @@ export default {
     ...mapActions("content", { getContent: "getContent" }),
     change(item, i) {
       this.$refs.popap.key = i;
-      this.$refs.popap.op = "change";
       this.$refs.popap.form = { ...item };
       this.openForm();
     },
     openForm() {
-      this.$refs.popap.open();
-      console.log("Открыть");
+      this.$refs.popap.open("change");
     },
     goSearch(item) {
       this.getContent({
         string: item.request,
-        order: item.item,
+        order: item.order,
         maxResults: item.range,
       });
       this.$router.push({ name: "main" });
@@ -80,13 +78,11 @@ export default {
   &__title {
     margin: 40px 0;
   }
-
   // .favorite__body
   &__body {
     display: flex;
     flex-direction: column;
   }
-
   // .favorite__item
   &__item {
     &:first-child {
@@ -95,7 +91,6 @@ export default {
     border-bottom: 1px $c-second solid;
   }
 }
-
 .item-fav {
   display: flex;
   justify-content: space-between;
@@ -105,9 +100,7 @@ export default {
     font-weight: 500;
     padding: 15px 20px;
   }
-
   // .item-fav__controls
-
   &__controls {
     display: flex;
     gap: 0 10px;
@@ -119,7 +112,6 @@ export default {
     color: $c-Light;
   }
   // .fav-controll__delete
-
   &--delete {
     color: #ff0000;
   }

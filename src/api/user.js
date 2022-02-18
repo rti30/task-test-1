@@ -7,7 +7,6 @@ function getToken(login) {
 }
 export default {
    login: async ({ login, password }) => {
-      console.log({ login, password });
       try {
          if (!login || !password) {
             console("Тут")
@@ -17,7 +16,6 @@ export default {
          const users = await usersList();
          const user = users.find(item => item.login === login);
          const validPassword = user?.password === password;
-         console.log(user, validPassword)
          if (user && validPassword) {
             return getToken(user.login);
          }
@@ -26,25 +24,23 @@ export default {
          }
       }
       catch (e) {
-         console.log(e)
+         console.warn(e)
          return false;
       }
    },
    auth: async (token) => {
       try {
          const userData = jwt.verify(token, SECRET_KEY);
-         console.log(userData);
          if (userData) {
-
             return getToken(userData.login);
          }
          else {
-            console.log("Токен не распознан");
+            console.warn("Токен не распознан");
             return false;
          }
       }
       catch (e) {
-         console.log(e)
+         console.warn(e)
          return false;
       }
    },

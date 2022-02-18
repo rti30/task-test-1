@@ -33,11 +33,6 @@ export default {
       search: null,
     };
   },
-  methods: {
-    onSubmit() {
-      console.log("Форма");
-    },
-  },
 };
 </script>
 <style lang="scss">

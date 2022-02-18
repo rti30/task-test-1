@@ -6,10 +6,6 @@
       @click.self="closeModal"
     >
       <div class="modal">
-        <!--         <div
-          class="modal-close"
-          @click="closeModal"
-        >&#10006;</div> -->
         <slot name="title">
           <h3 class="modal-title">Заголовок</h3>
         </slot>
@@ -58,13 +54,15 @@ export default {
 .modal {
   background: #fff;
   border-radius: 8px;
-  padding: 15px;
-  min-width: 420px;
+  padding: 20px 10px;
   max-width: 480px;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  @media (min-width: $tabletWidth + "px") {
+    padding: 35px 40px;
+  }
 
   &-close {
     border-radius: 50%;
@@ -88,33 +86,7 @@ export default {
   &-content {
     margin-bottom: 20px;
   }
-
-  &-footer {
-    &__button {
-      /*      background-color: #0971c7;
-      color: #fff;
-      border: none;
-      text-align: center;
-      padding: 8px;
-      font-size: 17px;
-      font-weight: 500;
-      border-radius: 8px;
-      min-width: 150px; */
-    }
-  }
 }
 
 //*========================
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-  opacity: 0;
-}
-.fade-enter-to {
-  opacity: 1;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
 </style>

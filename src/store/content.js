@@ -1,4 +1,4 @@
-import youtube from '@/api/youtube.js'
+import { youtube } from '@/api/youtube.js'
 export default {
    namespaced: true,
    state: {

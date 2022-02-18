@@ -59,15 +59,13 @@ import LoginInput from "@/components/ui/Input.vue";
 import { mapActions, mapGetters } from "vuex";
 export default {
   components: {
-    //InputButton,
-    //  LoginButton,
     LoginInput,
   },
   data() {
     return {
       formLogin: {
         login: "",
-        password: "1234",
+        password: "",
       },
       isFocus: false,
       viewPassword: false,
@@ -94,6 +92,7 @@ export default {
 </script>
 <style lang="scss">
 .login {
+  flex: 1 1 auto;
   height: 100%;
   display: flex;
   align-items: center;
@@ -124,8 +123,8 @@ export default {
     text-align: center;
     margin: 0 0 40px 0;
     img {
-      width: 40px;
-      height: 74px;
+      width: 35px;
+      height: 70px;
     }
   }
 
@@ -159,13 +158,10 @@ export default {
   &__password {
     position: relative;
   }
-  &__label {
-  }
+
   &__button {
     text-align: center;
     margin: 40px 0 0 0;
   }
-}
-.icon-eye {
 }
 </style>

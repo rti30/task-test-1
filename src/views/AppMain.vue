@@ -6,7 +6,7 @@
   </main>
 </template>
 <script>
-import MainHeader from "@/components/main/MainHeader.vue";
+import MainHeader from "@/components/common/CommonHeader.vue";
 import MainStart from "@/components/main/MainStart.vue";
 import MainFound from "@/components/main/MainFound.vue";
 import { mapGetters } from "vuex";

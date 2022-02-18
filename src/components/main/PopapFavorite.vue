@@ -110,15 +110,21 @@ export default {
     disabledReq() {
       return this.op === "save";
     },
+    canSave() {
+      return this.form.name?.trim() && this.form.request?.trim();
+    },
   },
   methods: {
     ...mapActions("user", {
       saveRequest: "saveRequest",
       change: "changeRequest",
     }),
+    ...mapActions("alert", {
+      addAlert: "add",
+    }),
 
     save() {
-      if (this.form.name?.trim()) {
+      if (this.canSave) {
         if (this.op === "change") {
           this.change({ form: { ...this.form }, key: this.key });
         } else {
@@ -127,13 +133,16 @@ export default {
         }
         this.close();
       } else {
-        console.log("Обязательные поля должны быть заполнены!");
+        this.addAlert({
+          text: "Обязательные поля должны быть заполнены!",
+        });
       }
     },
     cancel() {
       this.close();
     },
-    open() {
+    open(op) {
+      this.op = op ? op : "save";
       this.$refs.popap.isShow = true;
       document.querySelector("body").classList.add("lock");
     },
@@ -187,6 +196,10 @@ export default {
     font-size: 16px;
     line-height: calc(22 / 16);
   }
+  &__required {
+    color: #ff0000;
+    margin-right: 3px;
+  }
 
   // .save-form__input
 
@@ -201,23 +214,17 @@ export default {
   }
 
   // .save-form__row
-
   &__row {
     display: flex;
     gap: 0 15px;
   }
+  // .save-form__column
   &__column {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
   }
-
-  // .save-form__required
-
-  // .save-form__range
-
-  &__range {
-  }
+  // .save-form__buttons
   &__buttons {
     display: flex;
     justify-content: center;
@@ -232,12 +239,7 @@ export default {
   }
 
   // .range-block__label
-
   &__label {
-    /*     padding: 12px 30px;
-    border-radius: $main-radius;
-    border: 1px $c-second solid;
-    font-size: 20px; */
     border: 1px $c-second solid;
     border-radius: $main-radius;
     font-size: 20px;
@@ -249,15 +251,13 @@ export default {
 .modal-footer {
   // .modal-footer__button
   &__button {
+    white-space: nowrap;
+    flex: 0 0 50%;
     font-size: 18px;
-    min-width: 140px;
+    //  min-width: 140px;
     &:not(:last-child) {
       margin: 0 5px 0 0;
     }
   }
-}
-.btn {
-}
-.btn--light {
 }
 </style>

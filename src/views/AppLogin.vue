@@ -1,11 +1,13 @@
 <template>
-  <main-login></main-login>
+  <main class="page">
+    <login-main></login-main>
+  </main>
 </template>
 <script>
-import MainLogin from "@/components/main/MainLogin.vue";
+import LoginMain from "@/components/login/LoginMain.vue";
 export default {
   components: {
-    MainLogin,
+    LoginMain,
   },
 };
 </script>

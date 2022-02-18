@@ -25,15 +25,12 @@ export default {
          state.favorite.push(form)
       },
       changeRequest(state, { form, key }) {
-         console.log(form, key)
          state.favorite[key] = form;
       },
       setFav(state, data) {
-         console.log(data)
          state.favorite = data;
       },
       removeRequest(state, id) {
-         console.log("state, remove", id);
          state.favorite = state.favorite.filter(item => item.id !== id);
       },
       removeToken(state) {
@@ -46,13 +43,11 @@ export default {
          authPromise = new Promise(resolve => resolveAuth = resolve)
          const result = await userApi.login(payload);
          if (result) {
-            console.log(result);
             commit('installToken', result)
             setToken(result, "myTestToken")
             dispatch("getLocalFav");
          }
          else {
-            console.log(result);
             commit('installToken', null)
          }
          resolveAuth();
@@ -79,9 +74,7 @@ export default {
          dispatch("saveFavLocal")
       },
       changeRequest({ commit, getters, dispatch }, { form, key }) {
-         console.log(form, key)
          const hasFav = getters.favorite[key];
-         console.log(hasFav)
          if (hasFav) {
             commit('changeRequest', { form, key });
             dispatch("saveFavLocal")
@@ -112,7 +105,6 @@ export default {
          if (getters.isLogin) {
             const { login } = getUserId(getters.token)
             const favData = JSON.parse(localStorage.getItem("fav_" + login));
-            console.log(favData);
             if (favData) { dispatch("setFav", favData); }
          }
       },

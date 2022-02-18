@@ -39,28 +39,4 @@ export default {
 };
 </script>
 <style lang="scss">
-.input {
-  border-radius: $main-radius;
-  border: 1px rgba(39, 39, 39, 0.1) solid;
-  padding: 15px 36px 15px 10px;
-
-  &:focus {
-    background-color: $c-focus;
-  }
-  &--password {
-  }
-  &::placeholder {
-    color: $c-second;
-  }
-  &--search {
-    border-radius: $main-radius 0 0 $main-radius;
-  }
-
-  &__icon {
-    transform: translate(-100%, -50%);
-    padding: 10px 10px;
-    position: absolute;
-    top: 50%;
-  }
-}
 </style>

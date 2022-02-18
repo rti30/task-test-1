@@ -18,16 +18,13 @@ export default {
 <style lang="scss">
 .start {
   // .start__body
-  flex: 1 1 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   &__body {
-    flex: 1 0 auto;
-    transform: translate(0, -100%);
     max-width: calcSize(310, 690, $minWidth, $maxWidth);
+
+    margin: 120px auto 0;
     @media (min-width: $tabletWidth + "px") {
       max-width: 690px;
+      margin: 220px auto 0;
     }
   }
 
