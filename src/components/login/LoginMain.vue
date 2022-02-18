@@ -57,6 +57,7 @@
 import LoginInput from "@/components/ui/Input.vue";
 //import LoginButton from "@/components/ui/Button.vue";
 import { mapActions, mapGetters } from "vuex";
+
 export default {
   components: {
     LoginInput,
@@ -78,10 +79,24 @@ export default {
     ...mapActions("user", {
       login: "login",
     }),
+    ...mapActions("alert", {
+      addAlert: "add",
+    }),
+
     async onSubmit() {
-      await this.login(this.formLogin);
-      if (this.isLogin) {
-        this.$router.push({ name: "main" });
+      if (this.formLogin.login && this.formLogin.password) {
+        await this.login(this.formLogin);
+        if (this.isLogin) {
+          this.$router.push({ name: "main" });
+        } else {
+          this.addAlert({
+            text: "Неверный 'Логин' и/или 'Пароль'",
+          });
+        }
+      } else {
+        this.addAlert({
+          text: "Не заполнены все поля",
+        });
       }
     },
     toggleViewPassword() {

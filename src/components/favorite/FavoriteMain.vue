@@ -40,7 +40,7 @@
   </section>
 </template>
 <script>
-import PopapFav from "@/components/main/PopapFavorite.vue";
+import PopapFav from "@/components/common/PopapFavorite.vue";
 import { mapGetters, mapActions } from "vuex";
 
 export default {

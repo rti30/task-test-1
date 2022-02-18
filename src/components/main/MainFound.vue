@@ -94,7 +94,7 @@
 import VideoCard from "@/components/main/VideoCard.vue";
 import SearchButton from "@/components/ui/ButtonSearch.vue";
 import InputSearch from "@/components/ui/InputSearch.vue";
-import PopapFav from "@/components/main/PopapFavorite.vue";
+import PopapFav from "@/components/common/PopapFavorite.vue";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
