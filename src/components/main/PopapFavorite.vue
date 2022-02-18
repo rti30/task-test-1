@@ -64,21 +64,23 @@
             />
           </div>
         </div>
+        <div class="save-form__buttons">
+          <button
+            class="modal-footer__button btn btn--light"
+            @click="cancel"
+          >
+            Не сохранять
+          </button>
+          <button
+            class="modal-footer__button btn"
+            @click="save"
+          >Сохранить</button>
+        </div>
       </form>
     </template>
     <template v-slot:footer>
-      <div class="save-form__buttons">
-        <button
-          class="modal-footer__button btn btn--light"
-          @click="cancel"
-        >
-          Не сохранять
-        </button>
-        <button
-          class="modal-footer__button btn"
-          @click="save"
-        >Сохранить</button>
-      </div>
+      <template>
+      </template>
     </template>
   </popap>
 </template>

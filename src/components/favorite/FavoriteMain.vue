@@ -93,8 +93,9 @@ export default {
 }
 .item-fav {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
+
   // .item-fav__name
   &__name {
     font-weight: 500;
@@ -102,8 +103,10 @@ export default {
   }
   // .item-fav__controls
   &__controls {
+    flex: 1 1 auto;
     display: flex;
     gap: 0 10px;
+    justify-content: flex-end;
   }
 }
 .fav-controll {

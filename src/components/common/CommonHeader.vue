@@ -100,24 +100,23 @@ export default {
   }
 
   // .nav__link
-
   &__link {
     position: relative;
-    padding: 5px 5px 25px;
-    &--active {
-      color: $c-Light;
+    padding: 5px 5px 33px;
+    @media (min-width: $tabletWidth + "px") {
+      padding: 5px 5px 30px;
     }
-    &__link--active {
-      color: $c-Light;
-      &::before {
-        content: "";
-        background-color: $c-Light;
-        position: absolute;
-        width: 100%;
-        height: 2px;
-        bottom: 0;
-        left: 0;
-      }
+  }
+  &__link.router-link-exact-active {
+    color: $c-Light;
+    &::before {
+      content: "";
+      background-color: $c-Light;
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom: 0;
+      left: 0;
     }
   }
 

@@ -38,7 +38,7 @@
           </div>
         </div>
         <search-button
-          class="search__button  btn--search search-form__button"
+          class="btn--search"
           :text="'Найти'"
         >
         </search-button>
@@ -217,10 +217,10 @@ export default {
     display: grid;
     grid-template-columns: 1fr;
     @media (min-width: $tabletWidth + "px") {
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: repeat(3, calc(100% / 3));
     }
     @media (min-width: $PCWidth + "px") {
-      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-columns: 25% 25% 25% 25%;
     }
     //flex-wrap: wrap;
     gap: 25px 0;

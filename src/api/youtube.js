@@ -9,6 +9,7 @@ async function youtube({ string, order = "relevance", maxResults = 12 }) {
    }
    catch (e) {
       console.warn(e);
+      return false;
    }
 }
 
