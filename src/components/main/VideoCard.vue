@@ -29,7 +29,28 @@ export default {
       if (!this.detail?.viewCount) {
         return 0;
       } else {
-        return this.detail.viewCount >= 100000000000
+        const viewCount = this.detail.viewCount.toString();
+        return viewCount.length > 11
+          ? viewCount.substr(0, 3) + " млрд просмотров"
+          : viewCount.length > 10
+          ? viewCount.substr(0, 2) + " млрд просмотров"
+          : viewCount.length > 9
+          ? viewCount.substr(0, 1) + " млрд просмотров"
+          : viewCount.length > 8
+          ? viewCount.substr(0, 3) + " млн просмотров"
+          : viewCount.length > 7
+          ? viewCount.substr(0, 2) + " млн просмотров"
+          : viewCount.length > 6
+          ? viewCount.substr(0, 1) + " млн просмотров"
+          : viewCount.length > 5
+          ? viewCount.substr(0, 3) + " тыс просмотров"
+          : viewCount.length > 4
+          ? viewCount.substr(0, 2) + " тыс просмотров"
+          : viewCount.length > 3
+          ? viewCount.substr(0, 1) + " тыс просмотров"
+          : viewCount.length + " просмотров";
+
+        /*  return this.detail.viewCount >= 100000000000
           ? this.detail.viewCount.toString().substr(0, 3) + " млрд просмотров"
           : this.detail.viewCount >= 10000000000
           ? this.detail.viewCount.toString().substr(0, 2) + " млрд просмотров"
@@ -47,7 +68,7 @@ export default {
           ? this.detail.viewCount.toString().substr(0, 2) + " тыс просмотров"
           : this.detail.viewCount >= 1000
           ? this.detail.viewCount.toString().substr(0, 1) + " тыс просмотров"
-          : this.detail.viewCount + " просмотров";
+          : this.detail.viewCount + " просмотров"; */
       }
     },
   },
