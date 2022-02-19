@@ -83,6 +83,7 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 8px 0;
+  overflow: hidden;
 
   // .video-card__frame
   &__frame {
@@ -103,9 +104,9 @@ export default {
       "img title"
       "img desc";
     gap: 8px 20px;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 50% 50%;
     @media (min-width: $tabletWidth + "px") {
-      grid-template-columns: auto 1fr;
+      grid-template-columns: minmax(max-content, auto) 1fr;
     }
     // .video-card__frame
 
