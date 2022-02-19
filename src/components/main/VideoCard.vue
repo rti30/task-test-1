@@ -6,7 +6,7 @@
     ></video-frame>
     <div class="video-card__title sub-title">{{video.snippet.title}}</div>
     <div class="video-card__desc text"><span class="card-desc__text">{{video.snippet.description}}</span>
-      <span>{{viewCount}}</span>
+      <span>{{getViewPhrase}}</span>
     </div>
   </li>
 </template>
@@ -21,54 +21,51 @@ export default {
   },
   data() {
     return {
-      detail: 0,
+      detail: null,
+      wordDictionary: {
+        view: ["просмотр", "просмотра", "просмотров"],
+      },
     };
   },
   computed: {
-    viewCount() {
-      if (!this.detail?.viewCount) {
-        return 0;
-      } else {
-        const viewCount = this.detail.viewCount.toString();
-        return viewCount.length > 11
-          ? viewCount.substr(0, 3) + " млрд просмотров"
-          : viewCount.length > 10
-          ? viewCount.substr(0, 2) + " млрд просмотров"
-          : viewCount.length > 9
-          ? viewCount.substr(0, 1) + " млрд просмотров"
-          : viewCount.length > 8
-          ? viewCount.substr(0, 3) + " млн просмотров"
-          : viewCount.length > 7
-          ? viewCount.substr(0, 2) + " млн просмотров"
-          : viewCount.length > 6
-          ? viewCount.substr(0, 1) + " млн просмотров"
-          : viewCount.length > 5
-          ? viewCount.substr(0, 3) + " тыс просмотров"
-          : viewCount.length > 4
-          ? viewCount.substr(0, 2) + " тыс просмотров"
-          : viewCount.length > 3
-          ? viewCount.substr(0, 1) + " тыс просмотров"
-          : viewCount.length + " просмотров";
+    getViewPhrase() {
+      return (
+        this.viewCount.count +
+        " " +
+        this.viewCount.shortCount +
+        " " +
+        this.getWordView
+      );
+    },
 
-        /*  return this.detail.viewCount >= 100000000000
-          ? this.detail.viewCount.toString().substr(0, 3) + " млрд просмотров"
-          : this.detail.viewCount >= 10000000000
-          ? this.detail.viewCount.toString().substr(0, 2) + " млрд просмотров"
-          : this.detail.viewCount >= 1000000000
-          ? this.detail.viewCount.toString().substr(0, 1) + " млрд просмотров"
-          : this.detail.viewCount >= 100000000
-          ? this.detail.viewCount.toString().substr(0, 3) + " млн просмотров"
-          : this.detail.viewCount >= 10000000
-          ? this.detail.viewCount.toString().substr(0, 2) + " млн просмотров"
-          : this.detail.viewCount >= 1000000
-          ? this.detail.viewCount.toString().substr(0, 1) + " млн просмотров"
-          : this.detail.viewCount >= 100000
-          ? this.detail.viewCount.toString().substr(0, 3) + " тыс просмотров"
-          : this.detail.viewCount >= 10000
-          ? this.detail.viewCount.toString().substr(0, 2) + " тыс просмотров"
-          : this.detail.viewCount >= 1000
-          ? this.detail.viewCount.toString().substr(0, 1) + " тыс просмотров"
-          : this.detail.viewCount + " просмотров"; */
+    getWordView() {
+      const words = this.wordDictionary.view;
+      const value = this.viewCount.count;
+      let num = value % 10;
+      if (value > 10 && value < 20) return words[2];
+      if (num > 1 && num < 5) return words[1];
+      if (num == 1) return words[0];
+      return words[2];
+    },
+    viewCount() {
+      let result = { shortCount: "", count: 0 };
+      if (!this.detail?.viewCount) {
+        return result;
+      } else {
+        const viewCount = Math.ceil(this.detail.viewCount);
+        if (viewCount > 999 && viewCount < 1000000) {
+          result.shortCount = "тыс";
+          result.count = Math.trunc(viewCount / 1000);
+        } else if (viewCount > 999999 && viewCount < 1000000000) {
+          result.shortCount = "млн";
+          result.count = Math.trunc(viewCount / 1000000);
+        } else if (viewCount > 999999999 && viewCount < 1000000000000) {
+          result.shortCount = "млрд";
+          result.count = Math.trunc(viewCount / 1000000000);
+        } else {
+          result.count = viewCount;
+        }
+        return result;
       }
     },
   },
