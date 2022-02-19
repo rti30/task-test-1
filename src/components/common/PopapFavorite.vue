@@ -66,13 +66,13 @@
         </div>
         <div class="save-form__buttons">
           <button
-            class="modal-footer__button btn btn--light"
+            class="modal-footer__button btn btn--light hover-color"
             @click="cancel"
           >
             Не сохранять
           </button>
           <button
-            class="modal-footer__button btn"
+            class="modal-footer__button btn hover-color"
             @click="save"
           >Сохранить</button>
         </div>

@@ -27,26 +27,31 @@
             class="btn--none input__icon"
             @click="toggleViewPassword"
           >
-            <svg
-              v-if="!viewPassword"
-              class="icon-eye-close"
-              :class="{ 'icon-eye-close--active': isFocus}"
+            <transition
+              name="fade"
+              mode="out-in"
             >
-              <use xlink:href="@/assets/img/ui/input/inputSprite.svg#icon-eye-close"></use>
-            </svg>
-            <svg
-              v-else
-              class="icon-eye"
-              :class="{ 'icon-eye--active': isFocus}"
-            >
-              <use xlink:href="@/assets/img/ui/input/inputSprite.svg#icon-eye"></use>
-            </svg>
+              <svg
+                v-if="!viewPassword"
+                class="icon-eye-close"
+                :class="{ 'icon-eye-close--active': isFocus}"
+              >
+                <use xlink:href="@/assets/img/ui/input/inputSprite.svg#icon-eye-close"></use>
+              </svg>
+              <svg
+                v-else
+                class="icon-eye"
+                :class="{ 'icon-eye--active': isFocus}"
+              >
+                <use xlink:href="@/assets/img/ui/input/inputSprite.svg#icon-eye"></use>
+              </svg>
+            </transition>
           </button>
 
         </div>
         <div class="login__button">
           <!--  <login-button text="Войти"></login-button> -->
-          <button class="btn"><span class="btn__text">Войти</span></button>
+          <button class="btn hover-color"><span class="btn__text">Войти</span></button>
         </div>
 
       </form>

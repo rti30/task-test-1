@@ -12,20 +12,20 @@
           <ul class="nav__menu">
             <li>
               <router-link
-                class="nav__link"
+                class="nav__link hover-color"
                 :to="{ name: 'main' }"
               >Поиск</router-link>
             </li>
             <li>
               <router-link
-                class="nav__link"
+                class="nav__link hover-color"
                 :to="{ name: 'fav' }"
               >Избранное</router-link>
             </li>
           </ul>
           <ul class="nav__ui">
             <button
-              class="nav__button"
+              class="nav__button hover-color"
               type="button"
               @click="onLogout"
             >Выйти</button>

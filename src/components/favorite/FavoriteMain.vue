@@ -15,12 +15,12 @@
           <div class="item-fav__controls">
             <button
               type="button"
-              class="fav-controll fav-controll--change btn--none"
+              class="fav-controll fav-controll--change btn--none hover-color"
               @click="goSearch(item)"
             >Выполнить</button>
             <button
               type="button"
-              class="fav-controll fav-controll--change btn--none"
+              class="fav-controll fav-controll--change btn--none hover-color"
               @click="change(item, i)"
             >Изменить</button>
             <button
@@ -117,6 +117,11 @@ export default {
   // .fav-controll__delete
   &--delete {
     color: #ff0000;
+    @media (any-hover: hover) {
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 }
 </style>

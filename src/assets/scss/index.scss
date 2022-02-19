@@ -127,6 +127,7 @@ input[type="password"] {
 	padding: 15px 36px 15px 10px;
 
 	&:focus {
+		transition: background-color 0.3s ease 0s;
 		background-color: $c-focus;
 	}
 	&::placeholder {
@@ -166,15 +167,28 @@ a:link {
 .icon-eye-close {
 	width: 24px;
 	height: 24px;
+	@media (any-hover: hover) {
+		transition: fill 0.3s ease 0s;
+		&:hover {
+			fill: $c-focus;
+		}
+	}
 }
 
 .icon-grid,
 .icon-list {
+	transition: opacity 0.3s ease 0s;
 	width: 20px;
 	height: 20px;
 	opacity: 0.3;
+	cursor: pointer;
 	&--active {
 		opacity: 1;
+	}
+	@media (any-hover: hover) {
+		&:hover {
+			opacity: 0.7;
+		}
 	}
 }
 
@@ -183,9 +197,18 @@ a:link {
 	stroke: #1390e5;
 	&--active {
 		fill-opacity: 1;
-		fill: #c5e4f9;
+		fill: $c-focus;
+	}
+
+	@media (any-hover: hover) {
+		&:hover {
+			fill-opacity: 1;
+			fill: $c-focus;
+			transition: all 0.3s ease 0s;
+		}
 	}
 }
+
 .btn {
 	color: $c-third;
 	background-color: $c-Light;
@@ -208,9 +231,21 @@ a:link {
 		color: $c-Light;
 		border: 1px solid $c-Light;
 	}
+	transition: background-color, color 0.3s ease 0s;
+	&:disabled {
+		background-color: $c-focus;
+		color: $c-second;
+	}
 }
 
 //*<Тайминги и условия анимации>================================================================================================================
+@media (any-hover: hover) {
+	.hover-color:hover {
+		transition: color 0.3s ease 0s;
+		color: $c-focus;
+	}
+}
+
 .fade-enter-active,
 .fade-leave-active {
 	transition: opacity 0.5s;

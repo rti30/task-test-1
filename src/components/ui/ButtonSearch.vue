@@ -1,6 +1,6 @@
 <template>
   <button
-    class="btn"
+    class="btn hover-color"
     @click.prevent="getContent"
     :disabled="searchInProcessing"
   ><span class="btn__text">Найти</span></button>
