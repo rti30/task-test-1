@@ -98,6 +98,7 @@ export default {
           value: "title",
         },
         { name: "По количеству просмотров", value: "viewCount" },
+        { name: "По рейтингу", value: "rating" },
       ],
       form: { request: this.search, name: "", order: "relevance", range: 25 },
       key: null,
