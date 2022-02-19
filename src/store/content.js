@@ -39,6 +39,10 @@ export default {
       async getContent({ getters, commit }, params) {
          if (!getters.searchInProcessing) {
             commit('changeProcessSearch', true);
+            if (!params.string && !getters.search) {
+               commit('changeProcessSearch', false);
+               return //new Erorr Пустой поисковой запрос
+            }
             if (!params.string) {
                params.string = getters.search;
             }
