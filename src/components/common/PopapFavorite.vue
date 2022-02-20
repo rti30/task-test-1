@@ -100,7 +100,7 @@ export default {
         { name: "По количеству просмотров", value: "viewCount" },
         { name: "По рейтингу", value: "rating" },
       ],
-      form: { request: this.search, name: "", order: "relevance", range: 25 },
+      form: { request: "", name: "", order: "", range: 0 },
       key: null,
       op: "save",
     };
@@ -144,8 +144,21 @@ export default {
     cancel() {
       this.close();
     },
-    open(op) {
-      this.op = op ? op : "save";
+    open(config) {
+      if (config) {
+        this.form = config.form;
+        this.op = config.op;
+        this.key = config.key;
+      } else {
+        this.form = {
+          request: this.search,
+          name: "",
+          order: "relevance",
+          range: 25,
+        };
+        this.op = "save";
+        this.key = null;
+      }
       this.$refs.popap.isShow = true;
       document.querySelector("body").classList.add("lock");
     },
@@ -164,9 +177,6 @@ export default {
       value = Math.min(this.range.max, Math.max(0, e.target.value));
       this.form.range = value;
     },
-  },
-  mounted() {
-    this.form.request = this.search;
   },
   beforeUnmount() {
     this.clearForm();

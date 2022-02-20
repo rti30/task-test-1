@@ -54,12 +54,15 @@ export default {
     ...mapActions("user", { remove: "removeRequest" }),
     ...mapActions("content", { getContent: "getContent" }),
     change(item, i) {
-      this.$refs.popap.key = i;
-      this.$refs.popap.form = { ...item };
-      this.openForm();
+      const popapСonfig = {
+        form: { ...item },
+        key: i,
+        op: "change",
+      };
+      this.openForm(popapСonfig);
     },
-    openForm() {
-      this.$refs.popap.open("change");
+    openForm(popapСonfig) {
+      this.$refs.popap.open(popapСonfig);
     },
     goSearch(item) {
       this.getContent({
