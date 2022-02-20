@@ -3,7 +3,6 @@
     <div
       v-if="isShow"
       class="modal-shadow"
-      @click.self="closeModal"
     >
       <div class="modal">
         <slot name="title">

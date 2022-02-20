@@ -40,18 +40,26 @@ export default {
 
    actions: {
       async login({ commit, dispatch }, payload) {
-         authPromise = new Promise(resolve => resolveAuth = resolve)
-         const result = await userApi.login(payload);
-         if (result) {
-            commit('installToken', result)
-            setToken(result, "myTestToken")
-            dispatch("getLocalFav");
+         try {
+            authPromise = new Promise(resolve => resolveAuth = resolve)
+            const { body, messegeError } = await userApi.login(payload);
+            if (body) {
+               commit('installToken', body)
+               setToken(body, "myTestToken")
+               dispatch("getLocalFav");
+            }
+            else {
+               dispatch('alert/add', { text: messegeError }, { root: true })
+               commit('installToken', null)
+            }
+            resolveAuth();
          }
-         else {
-            commit('installToken', null)
+         catch (e) {
+            resolveAuth();
+            throw e;
          }
-         resolveAuth();
       },
+
       async auth({ commit }) {
          authPromise = new Promise(resolve => resolveAuth = resolve);
          const token = getToken("myTestToken");

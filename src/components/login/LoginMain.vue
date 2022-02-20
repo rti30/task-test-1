@@ -93,10 +93,6 @@ export default {
         await this.login(this.formLogin);
         if (this.isLogin) {
           this.$router.push({ name: "main" });
-        } else {
-          this.addAlert({
-            text: "Неверный 'Логин' и/или 'Пароль'",
-          });
         }
       } else {
         this.addAlert({

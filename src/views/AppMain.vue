@@ -1,7 +1,7 @@
 <template>
   <main class="page">
     <main-header></main-header>
-    <main-found v-if="hasVideos" />
+    <main-found v-if="currentSearch" />
     <main-start v-else></main-start>
   </main>
 </template>
@@ -18,7 +18,7 @@ export default {
   },
   computed: {
     ...mapGetters("content", {
-      hasVideos: "hasContent",
+      currentSearch: "currentSearch",
     }),
   },
 };

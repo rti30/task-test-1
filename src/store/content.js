@@ -11,7 +11,8 @@ export default {
       content: state => state.content,
       search: state => state.search,
       hasContent: state => state.content?.items?.length,
-      currentSearch: (state, getters) => getters.hasContent ? state.currentSearch : '',
+      //    currentSearch: (state, getters) => getters.hasContent ? state.currentSearch : '',
+      currentSearch: state => state.currentSearch,
       searchInProcessing: state => state.searchInProcessing,
    },
    mutations: {
@@ -36,20 +37,31 @@ export default {
             .replace(/\s$/, '')
          commit('installSearch', string)
       },
-      async getContent({ getters, commit }, params) {
+      async getContent({ dispatch, getters, commit }, params) {
          if (!getters.searchInProcessing) {
             commit('changeProcessSearch', true);
             if (!params.string && !getters.search) {
                commit('changeProcessSearch', false);
-               return //new Erorr Пустой поисковой запрос
+               return // Пустой поисковой запрос
             }
             if (!params.string) {
                params.string = getters.search;
             }
-            const response = await youtube(params)
-            commit('changeContent', response)
-            commit('changeCurrentSearch', params.string)
-            commit('installSearch', params.string)
+            try {
+               const { messegeError, body } = await youtube(params)
+               if (messegeError) {
+                  dispatch('alert/add', { text: messegeError }, { root: true })
+               }
+               else if (body) {
+                  commit('changeContent', body)
+                  commit('changeCurrentSearch', params.string)
+                  commit('installSearch', params.string)
+               }
+            }
+            catch (e) {
+               commit('changeProcessSearch', false);
+               throw e;
+            }
             commit('changeProcessSearch', false);
          }
       }

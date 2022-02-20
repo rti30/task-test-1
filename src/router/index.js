@@ -42,11 +42,14 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   if (to.meta.auth) {
     await store.getters['user/awaitAuth'];
-    store.getters['user/isLogin'] ? next() : next({ name: 'login' });
+    if (store.getters['user/isLogin']) { next() }
+    else {
+      next({ name: 'login' });
+      store.dispatch('alert/add', { text: "Для доступа к странице необходимо авторизоваться:" });
+    }
   }
   else if (to.meta.auth === false) {
     await store.getters['user/awaitAuth'];
-    console.log(store.getters['user/isLogin'])
     store.getters['user/isLogin'] ? next({ name: 'main' }) : next();
   }
   else {

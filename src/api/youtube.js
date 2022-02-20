@@ -1,15 +1,23 @@
-const baseURL = 'https://www.googleapis.com/youtube/v3/'
+
 import { server } from './server';
+import { snippetErrMes } from './messegeErrors/youtube';
+
+const baseURL = 'https://www.googleapis.com/youtube/v3/'
 const API_KEY = 'AIzaSyCKmh5zgy8PgsIhvdWO9YgrtiCEPVwqaBo'
 
 async function youtube({ string, order = "relevance", maxResults = 12 }) {
    try {
       let response = await server.get(`${baseURL}search?part=snippet&maxResults=${maxResults}&q=${string}&order=${order}&key=${API_KEY}`);
-      return response.data;
+      return { body: response.data };
    }
    catch (e) {
-      console.warn(e);
-      return false;
+      //! случай лимита ключа не тестировался
+      const messegeError = e.errors.some(item => item.reason in snippetErrMes)
+      if (messegeError) {
+         return { messegeError, body: false }
+      }
+      else throw e;
+      //! 
    }
 }
 
@@ -20,7 +28,7 @@ async function videoInfo(videoId) {
    }
    catch (e) {
       console.warn(e);
-      return false;
+      return false; // обработка не требуется
    }
 }
 
