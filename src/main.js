@@ -7,7 +7,8 @@ store.dispatch("user/auth").then(() => {
    store.dispatch("user/getLocalFav");
 });
 let app = createApp(App);
-app.config.errorHandler = () => {
+app.config.errorHandler = (e) => {
+   console.warn(e);
    store.dispatch("alert/add", { text: "Возникла непредвиденная ошибка, попробуйте позже" });
 }
 

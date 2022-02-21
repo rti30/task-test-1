@@ -120,7 +120,7 @@ export default {
       return this.content?.items;
     },
     totalResults() {
-      return this.content?.pageInfo.totalResults;
+      return this.content?.pageInfo?.totalResults;
     },
   },
   methods: {

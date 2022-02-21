@@ -27,7 +27,7 @@ export default {
       },
       changeProcessSearch(state, value) {
          state.searchInProcessing = value;
-      }
+      },
    },
 
    actions: {
@@ -64,6 +64,11 @@ export default {
             }
             commit('changeProcessSearch', false);
          }
+      },
+      clear({ commit }) {
+         commit('installSearch', '')
+         commit('changeCurrentSearch', '')
+         commit('changeContent', null)
       }
    }
 }

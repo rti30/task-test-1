@@ -116,18 +116,12 @@ export default {
             if (favData) { dispatch("setFav", favData); }
          }
       },
-      async logout({ commit, getters }) {
+      async logout({ commit, dispatch, getters }) {
          await getters.awaitAuth;
          cleanTokensData("myTestToken");
          commit('removeToken');
          commit('setFav', []);
-         commit('content/changeContent', [], { root: true });
+         dispatch('content/clear', {}, { root: true });
       }
    },
-
-
-   //!logout дождаться завершения автоизациии
-   //! Очистить токен в сторадже
-   //! Очистить токен
-   //! favorite = []
 }
